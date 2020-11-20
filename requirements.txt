@@ -1,0 +1,8 @@
+nltk==3.5
+numpy==1.20.1
+pandas==1.2.2
+Pillow==8.1.0
+plotly==4.14.3
+scikit-learn==0.24.1
+streamlit==0.76.0
+wordcloud==1.8.1

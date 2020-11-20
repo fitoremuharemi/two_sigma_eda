@@ -1,0 +1,20 @@
+# Byte-compiled / optimized / DLL files
+__pycache__
+pycache/
+*.py[cod]
+*$py.class
+
+# Unit test
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+.vscode
+
+datasets/market_train_full.csv
+datasets/news_train_pre2013.csv
+datasets/news_train_from2013.csv
+
+.DS_Store
