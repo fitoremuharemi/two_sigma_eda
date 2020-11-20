@@ -13,7 +13,8 @@ stop = set(stopwords.words('english'))
 
 DATA_PATH = "./datasets"
 MARKET_DATA = "market_train_full.csv"
-NEWS_DATA = "news_train_pre2013.csv"
+NEWS_DATA = "news_train_from2013.csv"
+
 
 st.set_page_config(layout="wide")
 
@@ -93,10 +94,14 @@ def mis_value_graph(data):
     layout = go.Layout(
         xaxis=dict(title='Columns'),
         yaxis=dict(title='Value Count'),
-        showlegend=True
+        showlegend=True,
+        legend=dict(
+            yanchor="bottom",
+            xanchor="right",
+        )
     )
     fig = go.Figure(data=data, layout=layout)
-    st.plotly_chart(fig)
+    st.plotly_chart(fig, use_container_width=True)
 
 
 if analysis.lower() == "data exploration":
@@ -134,7 +139,11 @@ if analysis.lower() == "data exploration":
     layout = go.Layout(
         xaxis=dict(title='Asset codes'),
         yaxis=dict(title='Value Count'),
-        showlegend=True
+        showlegend=True,
+        legend=dict(
+            yanchor="bottom",
+            xanchor="right",
+        )
     )
     fig = go.Figure(data=data, layout=layout)
 
@@ -142,7 +151,7 @@ if analysis.lower() == "data exploration":
         with st.beta_expander("Chart description: Unknown assets by Asset code"):
             st.write(
                 "Here we have the distribution of assetCodes for samples with asset name 'Unknown'. We could use them to impute asset names when possible.")
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
     with st.beta_expander("Market crash / Wordcloud", expanded=True):
         row2_1, row2_2 = st.beta_columns(2)
@@ -183,7 +192,7 @@ if analysis.lower() == "data exploration":
             showlegend=False
         )
         fig = go.Figure(data=data, layout=layout)
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
         st.info("We can see huge price fluctiations when market crashed. But this **must be  wrong**, as there was no huge crash on January 2010... which means that there must be some outliers on our data.")
 
