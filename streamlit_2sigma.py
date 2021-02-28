@@ -8,6 +8,10 @@ import datetime
 import numpy as np
 from PIL import Image
 from wordcloud import WordCloud
+
+import nltk
+nltk.download('stopwords')
+
 from nltk.corpus import stopwords
 stop = set(stopwords.words('english'))
 
