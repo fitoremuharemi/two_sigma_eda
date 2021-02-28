@@ -1,3 +1,6 @@
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/fitoremuharemi/two_sigma_eda/streamlit_2sigma.py)
+
+
 # TwoSigma EDA
 
 Exploratory data analysis of stock and news data from Two Sigma Kaggle competition, using Streamlit platform.
