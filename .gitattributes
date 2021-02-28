@@ -1,0 +1,2 @@
+datasets/market_pre2011.gzip filter=lfs diff=lfs merge=lfs -text
+datasets/news_pre2011.gzip filter=lfs diff=lfs merge=lfs -text

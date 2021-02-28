@@ -12,28 +12,21 @@ from nltk.corpus import stopwords
 stop = set(stopwords.words('english'))
 
 DATA_PATH = "./datasets"
-MARKET_DATA = "market_train_full.csv"
-NEWS_DATA = "news_train_from2013.csv"
+MARKET_DATA = "market_pre2011.gzip"
+NEWS_DATA = "news_pre2011.gzip"
 
 
 st.set_page_config(layout="wide")
 
 @st.cache(show_spinner=False)
 def load_data(datapath):
-    market_df = pd.read_csv(f"{datapath}/{MARKET_DATA}", index_col=0)
-    news_df = pd.read_csv(
-        f"{datapath}/{NEWS_DATA}",
-        usecols=["time", "assetName", "assetCodes",
-                 "sentimentClass", "headline"]
-    )
+    market_df = pd.read_parquet(f"{datapath}/{MARKET_DATA}")
+    news_df = pd.read_parquet(f"{datapath}/{NEWS_DATA}")
     
-    # news_df = pd.read_csv(f"{datapath}/news_train_from2013.csv")
     market_df['price_diff'] = market_df['close'] - market_df['open']
-    market_df["time"] = pd.to_datetime(market_df["time"])
-    market_df = market_df.set_index(['time'])
+    market_df.index = pd.to_datetime(market_df.index)
     
-    news_df["time"] = pd.to_datetime(news_df["time"])
-    news_df = news_df.set_index(["time"])
+    news_df.index = pd.to_datetime(news_df.index)
     
     return market_df, news_df
 
@@ -329,8 +322,7 @@ elif analysis.lower() == "sentiment analysis":
     selected_assets = st.sidebar.multiselect(
         "Please select the assets",
         assets,
-        default=['Google Inc', 'Apple Inc',
-                 'Facebook Inc', 'Microsoft Corp', 'Intel Corp']
+        default=['Google Inc', 'Apple Inc', 'Microsoft Corp', 'Intel Corp']
     )
 
     start_date, end_date = st.sidebar.date_input("Time period (from/to)", [datetime.date(

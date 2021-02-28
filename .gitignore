@@ -13,8 +13,6 @@ pycache/
 
 .vscode
 
-datasets/market_train_full.csv
-datasets/news_train_pre2013.csv
-datasets/news_train_from2013.csv
+datasets/*.csv
 
 .DS_Store

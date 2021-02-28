@@ -6,3 +6,4 @@ plotly==4.14.3
 scikit-learn==0.24.1
 streamlit==0.76.0
 wordcloud==1.8.1
+pyarrow==3.0.0
