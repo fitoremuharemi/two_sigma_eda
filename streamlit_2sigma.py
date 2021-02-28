@@ -18,16 +18,17 @@ NEWS_DATA = "news_pre2011.gzip"
 
 st.set_page_config(layout="wide")
 
+
 @st.cache(show_spinner=False)
 def load_data(datapath):
     market_df = pd.read_parquet(f"{datapath}/{MARKET_DATA}")
     news_df = pd.read_parquet(f"{datapath}/{NEWS_DATA}")
-    
+
     market_df['price_diff'] = market_df['close'] - market_df['open']
     market_df.index = pd.to_datetime(market_df.index)
-    
+
     news_df.index = pd.to_datetime(news_df.index)
-    
+
     return market_df, news_df
 
 
@@ -332,8 +333,8 @@ elif analysis.lower() == "sentiment analysis":
     row2_1, row2_2 = st.beta_columns(2)
 
     sentiment_dict = dict(
-        negative=-1,
-        positive=1
+        negative="-1",
+        positive="1"
     )
 
     def top10_mean_sentiment_plot(sentiment, start_date, end_date):
@@ -410,6 +411,7 @@ elif analysis.lower() == "sentiment analysis":
         for name, group in asset_news_df.groupby(pd.Grouper(freq=period)):
             d = name.strftime("%b '%y")
             counts = group["sentimentClass"].value_counts()
+            counts.index = counts.index.astype("int8")
             mean_sentiment_score = np.average(counts.index, weights=counts)
             X.append(d)
             Y.append(mean_sentiment_score)
